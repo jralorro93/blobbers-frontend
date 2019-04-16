@@ -9,13 +9,14 @@
 // }
 let bg;
 function preload() {
-  bg = loadImage('assets/cloud-bg.png')
+  bg = loadImage('assets/new-cloud.jpg')
 }
 
 function setup() {
-  createCanvas(1920,700)
+  createCanvas(1280,720)
 }
 
 function draw() {
   background(bg)
+
 }
