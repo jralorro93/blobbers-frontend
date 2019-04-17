@@ -23,7 +23,7 @@
 let stretchy;
 let blobbers;
 let enemies;
-let score; 
+let score;
 
 function setup() {
 
@@ -105,9 +105,7 @@ function draw() {
 
 
   drawSprites();
-  if ((strechy > width) || (stretchy < 0)) {
-    stretchy = strechy - 3
-  }
+
 }
 
 
