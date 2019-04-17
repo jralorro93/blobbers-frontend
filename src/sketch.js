@@ -23,7 +23,12 @@
 let stretchy;
 let blobbers;
 let enemies;
-let score;
+let score = 0;
+let bg;
+
+function preload() {
+  bg = loadImage('assets/new-cloud.jpg')
+}
 
 function setup() {
 
@@ -54,11 +59,6 @@ function setup() {
 
 
   // enemies.draw = function() { ellipse(0,0,10,10)
-
-
-
-
-
 
 
 
@@ -99,7 +99,7 @@ function setup() {
 
 
 function draw() {
-  background(255, 255, 255);
+  background(bg);
   // blobbers.draw = function() { ellipse(0,0,10,10) }
   //mouse trailer, the speed is inversely proportional to the mouse distance
   // stretchy.velocity.x = (mouseX-stretchy.position.x)/10;
@@ -111,6 +111,9 @@ function draw() {
 
   fallingRain(enemies);
   drawSprites();
+  fill(0, 255, 255);
+  textSize(24);
+  text("Score: " + score, 10, 25)
 }
 
 
@@ -132,7 +135,11 @@ function draw() {
 function dontCollect(collector, collected) {
   collected.remove();
   collector.scale -= .15;
+
   // moreEnemies(enemies);
+
+  score-= 1
+
 ///////if stretchy scale becomes less than -0.05000000000000007, remove it and pop up with "GAME OVER"
 }
 
@@ -144,6 +151,8 @@ function collect(collector, collected) {
   //the event
   collected.remove();
   collector.scale += .15;
+
+  score+= 3
 }
 
 //////////FALLING BLUE RAIN
