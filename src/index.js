@@ -1,5 +1,5 @@
-// const userUlTag = document.querySelector('.user-list')
-//
+const userUlTag = document.querySelector('.user-list')
+
 // const userTag = (user) => {
 // return `<li>
 //   <h3>${user.name}
@@ -7,14 +7,22 @@
 //   </h3>
 // </li>`;
 // }
-// document.addEventListener('DOMContentLoaded', () => {
-//   const endPoint = 'http://localhost:3000/api/v1/users';
-//   fetch(endPoint)
-//     .then((response) => {
-//       return response.json()
-//      }).then((parsedJson) => {
-//       parsedJson.forEach((user) => {
-//         userUlTag.innerHTML += userTag(user)
-//       })
-//     })
-// });
+
+const endPoint = 'http://localhost:3000/api/v1/users';
+const postRequest = (user) => {
+  return fetch(endPoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(user)
+  }).then((response) => {
+    return response.json()
+  })
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+});

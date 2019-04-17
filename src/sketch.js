@@ -25,6 +25,7 @@ let blobbers;
 let enemies;
 let score = 0;
 let bg;
+let timer = 60;
 
 function preload() {
   bg = loadImage('assets/new-cloud.jpg')
@@ -104,16 +105,27 @@ function draw() {
   //mouse trailer, the speed is inversely proportional to the mouse distance
   // stretchy.velocity.x = (mouseX-stretchy.position.x)/10;
   // stretchy.velocity.y = (mouseY-stretchy.position.y)/10;
+  text("Time: " + timer, 1300, 30)
 
+  if (frameCount % 60 == 0 && timer > 0) {
+    timer --;
+    fallingRain(enemies);
+  }
+  if (timer == 0) {
+    textSize(150)
+    text("GAME OVER", 300, height/2);
+  }
   stretchy.overlap(blobbers, collect);
   stretchy.overlap(enemies, dontCollect);
   // stretchy.collide(walls);
-  fallingRain(enemies);
+
 
   drawSprites();
   fill(0, 255, 255);
   textSize(24);
   text("Score: " + score, 10, 25)
+
+
 }
 
 function moreEnemies(sprite) {
