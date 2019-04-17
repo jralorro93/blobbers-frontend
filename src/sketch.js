@@ -23,6 +23,7 @@
 let stretchy;
 let blobbers;
 let enemies;
+let score; 
 
 function setup() {
 
@@ -50,6 +51,7 @@ function setup() {
     enemy.shapeColor = color(50, 60, 255)
     // dot.addAnimation('normal', 'assets/small_circle0001.png', 'assets/small_circle0001.png');
     enemies.add(enemy);
+
   }
 
 
@@ -103,6 +105,9 @@ function draw() {
 
 
   drawSprites();
+  if ((strechy > width) || (stretchy < 0)) {
+    stretchy = strechy - 3
+  }
 }
 
 
@@ -131,19 +136,19 @@ function collect(collector, collected) {
 //////////SETTING UP THE KEY COMMANDS: UP, DOWN, LEFT, RIGHT, SPACE FOR FULL STOP
 function keyPressed() {
   if (keyCode == RIGHT_ARROW) {
-    stretchy.setSpeed(1, 0);
+    stretchy.setSpeed(3, 0);
     // stretchy.velocity.x = (stretchy.position.x)/10;
   }
   else if (keyCode == DOWN_ARROW) {
-    stretchy.setSpeed(1, 90);
+    stretchy.setSpeed(3, 90);
     // stretchy.velocity.y = (stretchy.position.y)/10;
   }
   else if (keyCode == LEFT_ARROW) {
-    stretchy.setSpeed(1, 180);
+    stretchy.setSpeed(3, 180);
     // stretchy.velocity.x = (stretchy.position.x)/10;
   }
   else if (keyCode == UP_ARROW) {
-    stretchy.setSpeed(1, 270);
+    stretchy.setSpeed(3, 270);
     // stretchy.velocity.y = (stretchy.position.y)/10;
   }
   else if (key == ' ') {
