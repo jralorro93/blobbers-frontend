@@ -46,7 +46,7 @@ function setup() {
   }
 
 
-///////////////CREATING RANDOM ENEMIES, (20 OF THEM, DIFFERENT COLOR)
+///////////////CREATING RANDOM ENEMIES, (50 OF THEM, DIFFERENT COLOR)
   enemies = new Group();
 
   for(let j=0; j<50; j++){
@@ -108,21 +108,25 @@ function draw() {
   stretchy.overlap(blobbers, collect);
   stretchy.overlap(enemies, dontCollect);
   // stretchy.collide(walls);
-  fallingRain(enemies);
 
+  fallingRain(enemies);
   drawSprites();
   fill(0, 255, 255);
   textSize(24);
   text("Score: " + score, 10, 25)
 }
 
-function moreEnemies(sprite) {
-  for(let j=0; j<2; j++){
-    let sprite = createSprite(random(0, width), random(0, height), 10, 10);
-    sprite.shapeColor = color(50, 60, 255)
-    enemies.add(sprite);
-  }
-}
+
+
+
+///////////CREATE MORE ENEMIES, EVERYTIME YOU RUN INTO THEM
+// function moreEnemies(sprite) {
+//   for(let j=0; j<3; j++){
+//     let sprite = createSprite(random(0, width), random(0, height), 10, 10);
+//     sprite.shapeColor = color(50, 60, 255)
+//     enemies.add(sprite);
+//   }
+// }
 
 
 
@@ -131,8 +135,11 @@ function moreEnemies(sprite) {
 function dontCollect(collector, collected) {
   collected.remove();
   collector.scale -= .15;
+
+  // moreEnemies(enemies);
+
   score-= 1
-  moreEnemies(enemies);
+
 ///////if stretchy scale becomes less than -0.05000000000000007, remove it and pop up with "GAME OVER"
 }
 
@@ -144,9 +151,8 @@ function collect(collector, collected) {
   //the event
   collected.remove();
   collector.scale += .15;
+
   score+= 3
-
-
 }
 
 //////////FALLING BLUE RAIN
@@ -167,6 +173,7 @@ function keyPressed() {
   }
   else if (keyCode == DOWN_ARROW) {
     stretchy.setSpeed(3, 90);
+
     // stretchy.velocity.y = (stretchy.position.y)/10;
   }
   else if (keyCode == LEFT_ARROW) {
