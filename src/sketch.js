@@ -1,21 +1,3 @@
-
-// let bg;
-// function preload() {
-//   bg = loadImage('assets/new-cloud.jpg')
-// }
-//
-// function setup() {
-//   createCanvas(1280,720)
-// }
-//
-// function draw() {
-//   background(bg)
-//
-// }
-
-
-
-
 //Dynamically drawn sprites
 //sprite with a custom drawing function follows the mouse
 //and changes shape according to its speed
@@ -26,20 +8,16 @@ let enemies;
 let score = 0;
 let bg;
 let timer = 60;
+let gameStart = false;
 
 function preload() {
   bg = loadImage('assets/new-cloud.jpg')
 }
 
 function setup() {
-
   createCanvas(windowWidth, windowHeight);
-
-
-
   ///////////////CREATING RANDOM BLOBS, (20 OF THEM, SAME COLOR)
   blobbers = new Group();
-
   for(let j=0; j<20; j++){
     let blob = createSprite(random(0, width), random(0, height), 10, 10);
     blob.shapeColor = color(237, 205, 0);
@@ -49,40 +27,19 @@ function setup() {
 
 ///////////////CREATING RANDOM ENEMIES, (50 OF THEM, DIFFERENT COLOR)
   enemies = new Group();
-
   for(let j=0; j<50; j++){
     let enemy = createSprite(random(0, width), random(0, height), 10, 10);
     enemy.shapeColor = color(50, 60, 255)
 
     enemies.add(enemy);
   }
-
-
-
   // enemies.draw = function() { ellipse(0,0,10,10)
 
 
-
-
-
-
-  // walls = new Group();
-  //
-  // for (var i = 0; i < 20; i++) {
-  //   var w = createSprite(
-  //     random(125, width-125), (height/5)*i,
-  //     random(10, 100), random(10, 100));
-  //   w.shapeColor = color(0);
-  //   walls.add(w);
-  // }
-
   // face = loadImage('assets/face.png');
 
-  //Sometimes image sequences are not enough and you may want to
-  //use p5's drawing function while retaining the built-in features of the
-  //sprite class
+////////////Creates User blob
   stretchy = createSprite(400, 200, 80, 80);
-
   stretchy.draw = function() {
 
     //Color:
@@ -93,24 +50,18 @@ function setup() {
     ellipse(0, 0, 100+this.getSpeed(), 100-this.getSpeed());
   };
   stretchy.maxSpeed = 10;
-
-
 }
-
-
 
 function draw() {
   background(bg);
-  // blobbers.draw = function() { ellipse(0,0,10,10) }
-  //mouse trailer, the speed is inversely proportional to the mouse distance
-  // stretchy.velocity.x = (mouseX-stretchy.position.x)/10;
-  // stretchy.velocity.y = (mouseY-stretchy.position.y)/10;
-  text("Time: " + timer, 1300, 30)
 
+/////////////ADDED TIMER//////////////////////////
+  text("Time: " + timer, 1300, 30)
   if (frameCount % 60 == 0 && timer > 0) {
     timer --;
-    fallingRain(enemies);
+
   }
+////////////GAME OVER/////////////////////////////
   if (timer == 0) {
     textSize(150)
     text("GAME OVER", 300, height/2);
@@ -118,31 +69,31 @@ function draw() {
   stretchy.overlap(blobbers, collect);
   stretchy.overlap(enemies, dontCollect);
   // stretchy.collide(walls);
-<<<<<<< HEAD
 
-=======
->>>>>>> 3d289f96d2e5cf880139b177fdfdc44f9ca78ad9
 
   fallingRain(enemies);
   drawSprites();
   fill(0, 255, 255);
   textSize(24);
   text("Score: " + score, 10, 25)
+}
 
+////////////////////////Create login
+function login() {
+  if (gameStart != true) {
 
+  }
 }
 
 
-
-
 ///////////CREATE MORE ENEMIES, EVERYTIME YOU RUN INTO THEM
-// function moreEnemies(sprite) {
-//   for(let j=0; j<3; j++){
-//     let sprite = createSprite(random(0, width), random(0, height), 10, 10);
-//     sprite.shapeColor = color(50, 60, 255)
-//     enemies.add(sprite);
-//   }
-// }
+function moreEnemies(sprite) {
+  for(let j=0; j<3; j++){
+    let sprite = createSprite(random(0, width), random(0, height), 10, 10);
+    sprite.shapeColor = color(50, 60, 255)
+    enemies.add(sprite);
+  }
+}
 
 
 
@@ -152,7 +103,7 @@ function dontCollect(collector, collected) {
   collected.remove();
   collector.scale -= .15;
 
-  // moreEnemies(enemies);
+  moreEnemies(enemies);
 
   score-= 1
 
@@ -205,3 +156,41 @@ function keyPressed() {
   }
   return false;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// walls = new Group();
+//
+// for (var i = 0; i < 20; i++) {
+//   var w = createSprite(
+//     random(125, width-125), (height/5)*i,
+//     random(10, 100), random(10, 100));
+//   w.shapeColor = color(0);
+//   walls.add(w);
+// }
