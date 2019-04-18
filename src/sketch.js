@@ -26,6 +26,7 @@ let enemies;
 let score = 0;
 let bg;
 
+
 function preload() {
   bg = loadImage('assets/new-cloud.jpg')
 }
@@ -52,35 +53,16 @@ function setup() {
   for(let j=0; j<50; j++){
     let enemy = createSprite(random(0, width), random(0, height), 10, 10);
     enemy.shapeColor = color(50, 60, 255)
-
     enemies.add(enemy);
   }
 
 
 
-  // enemies.draw = function() { ellipse(0,0,10,10)
 
 
 
 
-
-
-  // walls = new Group();
-  //
-  // for (var i = 0; i < 20; i++) {
-  //   var w = createSprite(
-  //     random(125, width-125), (height/5)*i,
-  //     random(10, 100), random(10, 100));
-  //   w.shapeColor = color(0);
-  //   walls.add(w);
-  // }
-
-  // face = loadImage('assets/face.png');
-
-  //Sometimes image sequences are not enough and you may want to
-  //use p5's drawing function while retaining the built-in features of the
-  //sprite class
-  stretchy = createSprite(400, 200, 80, 80);
+  stretchy = createSprite(700, 400, 80, 80);
 
   stretchy.draw = function() {
 
@@ -113,20 +95,23 @@ function draw() {
   drawSprites();
   fill(0, 255, 255);
   textSize(24);
-  text("Score: " + score, 10, 25)
+  text("Score: " + score, 13, 25)
+
+
 }
 
 
 
 
 ///////////CREATE MORE ENEMIES, EVERYTIME YOU RUN INTO THEM
-// function moreEnemies(sprite) {
-//   for(let j=0; j<3; j++){
-//     let sprite = createSprite(random(0, width), random(0, height), 10, 10);
-//     sprite.shapeColor = color(50, 60, 255)
-//     enemies.add(sprite);
-//   }
-// }
+function moreEnemies(sprite) {
+
+for(let j=0; j<3; j++){
+  let enemy = createSprite(random(0, width), random(0, height), 10, 10);
+  enemy.shapeColor = color(50, 60, 255)
+  enemy.addToGroup(enemies);
+}
+}
 
 
 
@@ -134,11 +119,12 @@ function draw() {
 
 function dontCollect(collector, collected) {
   collected.remove();
+  moreEnemies(enemies);
   collector.scale -= .15;
 
-  // moreEnemies(enemies);
 
-  score-= 1
+  // collected.add();
+  score -= 1;
 
 ///////if stretchy scale becomes less than -0.05000000000000007, remove it and pop up with "GAME OVER"
 }
