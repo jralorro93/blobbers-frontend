@@ -7,7 +7,7 @@ let blobbers;
 let enemies;
 let score = 0;
 let bg;
-let timer = 60;
+let timer = 30;
 let gameStart = false;
 // let input;
 // let button;
@@ -40,29 +40,17 @@ function setup() {
 
 ///////////////CREATING RANDOM ENEMIES, (50 OF THEM, DIFFERENT COLOR)
   enemies = new Group();
-  for(let j=0; j<50; j++){
+  for(let j=0; j<70; j++){
     let enemy = createSprite(random(0, width), random(0, height), 10, 10);
     enemy.shapeColor = color(50, 60, 255)
     enemies.add(enemy);
   }
 
-
-
-
-
-
-
+////////////Creates User blob
   stretchy = createSprite(700, 400, 80, 80);
 
 
-  // enemies.draw = function() { ellipse(0,0,10,10)
 
-
-  // face = loadImage('assets/face.png');
-
-////////////Creates User blob
-  stretchy = createSprite(400, 200, 80, 80);
-  
   stretchy.draw = function() {
 
     //Color:
@@ -79,24 +67,28 @@ function draw() {
   background(bg);
 
 /////////////ADDED TIMER//////////////////////////
-  text("Time: " + timer, 1300, 30)
+  textSize(24);
+  text("Seconds Remaining: " + timer, 1100, 30)
   if (frameCount % 60 == 0 && timer > 0) {
     timer --;
 
   }
 ////////////GAME OVER/////////////////////////////
-  if (timer == 0) {
+  if (timer == 0 || stretchy.scale === -0.05000000000000007) {
     textSize(150)
     text("GAME OVER", 300, height/2);
+    textSize(24);
+    text("Score: " + score, 13, 25)
+    blobbers.remove()
+    enemies.remove()
   }
+
   stretchy.overlap(blobbers, collect);
   stretchy.overlap(enemies, dontCollect);
 
-  // login()
-
+  // fallingRain(blobbers)
   fallingRain(enemies);
   drawSprites();
-  fill(0, 255, 255);
   textSize(24);
   text("Score: " + score, 13, 25)
 
@@ -122,19 +114,10 @@ function draw() {
 ///////////CREATE MORE ENEMIES, EVERYTIME YOU RUN INTO THEM
 function moreEnemies(sprite) {
 
-
-for(let j=0; j<3; j++){
-  let enemy = createSprite(random(0, width), random(0, height), 10, 10);
-  enemy.shapeColor = color(50, 60, 255)
-  enemy.addToGroup(enemies);
-}
-
   for(let j=0; j<3; j++){
-    let sprite = createSprite(random(0, width), random(0, height), 10, 10);
-    sprite.shapeColor = color(50, 60, 255)
-    enemies.add(sprite);
+    let enemy = createSprite(random(0, width), random(0, height), 10, 10);
+    enemy.shapeColor = color(50, 60, 255)
   }
-
 }
 
 
@@ -143,14 +126,9 @@ for(let j=0; j<3; j++){
 
 function dontCollect(collector, collected) {
   collected.remove();
-  moreEnemies(enemies);
   collector.scale -= .15;
 
-
-
-  moreEnemies(enemies);
-
-
+  // moreEnemies(enemies);
   // collected.add();
   score -= 1;
 
@@ -163,10 +141,12 @@ function collect(collector, collected) {
   //collector is another name for stretchy
   //collected is the sprite in the group collectibles that triggered
   //the event
-  collected.remove();
-  collector.scale += .15;
+      collected.remove();
+      score+= 3
+  if (collector.scale < 1) {
+    collector.scale += .15;
 
-  score+= 3
+  }
 }
 
 //////////FALLING BLUE RAIN
@@ -224,11 +204,11 @@ function keyPressed() {
 
 
 
-
-
-
-
-
+// let newEnemies;
+// newEnemies = new Group();
+// // enemy.addToGroup(enemies);
+// newEnemies.add(enemy)
+// stretchy.overlap(newEnemies, dontCollect)
 
 
 
