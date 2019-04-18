@@ -9,6 +9,9 @@ let score = 0;
 let bg;
 let timer = 60;
 let gameStart = false;
+// let input;
+// let button;
+// let greeting;
 
 function preload() {
   bg = loadImage('assets/new-cloud.jpg')
@@ -16,6 +19,15 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  //
+  // input = createInput();
+  // button = createButton('Submit');
+  //
+  //
+  //
+
+
+
   ///////////////CREATING RANDOM BLOBS, (20 OF THEM, SAME COLOR)
   blobbers = new Group();
   for(let j=0; j<20; j++){
@@ -68,8 +80,8 @@ function draw() {
   }
   stretchy.overlap(blobbers, collect);
   stretchy.overlap(enemies, dontCollect);
-  // stretchy.collide(walls);
 
+  // login()
 
   fallingRain(enemies);
   drawSprites();
@@ -79,11 +91,19 @@ function draw() {
 }
 
 ////////////////////////Create login
-function login() {
-  if (gameStart != true) {
-
-  }
-}
+// function login() {
+//   if (gameStart != true) {
+//     rect(340, 200, width/2, height/2);
+//     input.position(width/2, height/2);
+//     button.position(input.x + input.width, 65);
+//     button.mousePressed(greet)
+//   }
+// }
+//
+// function greet(){
+//   let name = input.value()
+//   debugger
+// }
 
 
 ///////////CREATE MORE ENEMIES, EVERYTIME YOU RUN INTO THEM
