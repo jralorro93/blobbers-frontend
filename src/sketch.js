@@ -1,21 +1,3 @@
-
-// let bg;
-// function preload() {
-//   bg = loadImage('assets/new-cloud.jpg')
-// }
-//
-// function setup() {
-//   createCanvas(1280,720)
-// }
-//
-// function draw() {
-//   background(bg)
-//
-// }
-
-
-
-
 //Dynamically drawn sprites
 //sprite with a custom drawing function follows the mouse
 //and changes shape according to its speed
@@ -25,6 +7,11 @@ let blobbers;
 let enemies;
 let score = 0;
 let bg;
+let timer = 60;
+let gameStart = false;
+// let input;
+// let button;
+// let greeting;
 
 
 function preload() {
@@ -32,14 +19,18 @@ function preload() {
 }
 
 function setup() {
-
   createCanvas(windowWidth, windowHeight);
+  //
+  // input = createInput();
+  // button = createButton('Submit');
+  //
+  //
+  //
 
 
 
   ///////////////CREATING RANDOM BLOBS, (20 OF THEM, SAME COLOR)
   blobbers = new Group();
-
   for(let j=0; j<20; j++){
     let blob = createSprite(random(0, width), random(0, height), 10, 10);
     blob.shapeColor = color(237, 205, 0);
@@ -49,7 +40,6 @@ function setup() {
 
 ///////////////CREATING RANDOM ENEMIES, (50 OF THEM, DIFFERENT COLOR)
   enemies = new Group();
-
   for(let j=0; j<50; j++){
     let enemy = createSprite(random(0, width), random(0, height), 10, 10);
     enemy.shapeColor = color(50, 60, 255)
@@ -64,6 +54,15 @@ function setup() {
 
   stretchy = createSprite(700, 400, 80, 80);
 
+
+  // enemies.draw = function() { ellipse(0,0,10,10)
+
+
+  // face = loadImage('assets/face.png');
+
+////////////Creates User blob
+  stretchy = createSprite(400, 200, 80, 80);
+  
   stretchy.draw = function() {
 
     //Color:
@@ -74,22 +73,26 @@ function setup() {
     ellipse(0, 0, 100+this.getSpeed(), 100-this.getSpeed());
   };
   stretchy.maxSpeed = 10;
-
-
 }
-
-
 
 function draw() {
   background(bg);
-  // blobbers.draw = function() { ellipse(0,0,10,10) }
-  //mouse trailer, the speed is inversely proportional to the mouse distance
-  // stretchy.velocity.x = (mouseX-stretchy.position.x)/10;
-  // stretchy.velocity.y = (mouseY-stretchy.position.y)/10;
 
+/////////////ADDED TIMER//////////////////////////
+  text("Time: " + timer, 1300, 30)
+  if (frameCount % 60 == 0 && timer > 0) {
+    timer --;
+
+  }
+////////////GAME OVER/////////////////////////////
+  if (timer == 0) {
+    textSize(150)
+    text("GAME OVER", 300, height/2);
+  }
   stretchy.overlap(blobbers, collect);
   stretchy.overlap(enemies, dontCollect);
-  // stretchy.collide(walls);
+
+  // login()
 
   fallingRain(enemies);
   drawSprites();
@@ -100,17 +103,38 @@ function draw() {
 
 }
 
-
+////////////////////////Create login
+// function login() {
+//   if (gameStart != true) {
+//     rect(340, 200, width/2, height/2);
+//     input.position(width/2, height/2);
+//     button.position(input.x + input.width, 65);
+//     button.mousePressed(greet)
+//   }
+// }
+//
+// function greet(){
+//   let name = input.value()
+//   debugger
+// }
 
 
 ///////////CREATE MORE ENEMIES, EVERYTIME YOU RUN INTO THEM
 function moreEnemies(sprite) {
+
 
 for(let j=0; j<3; j++){
   let enemy = createSprite(random(0, width), random(0, height), 10, 10);
   enemy.shapeColor = color(50, 60, 255)
   enemy.addToGroup(enemies);
 }
+
+  for(let j=0; j<3; j++){
+    let sprite = createSprite(random(0, width), random(0, height), 10, 10);
+    sprite.shapeColor = color(50, 60, 255)
+    enemies.add(sprite);
+  }
+
 }
 
 
@@ -121,6 +145,10 @@ function dontCollect(collector, collected) {
   collected.remove();
   moreEnemies(enemies);
   collector.scale -= .15;
+
+
+
+  moreEnemies(enemies);
 
 
   // collected.add();
@@ -175,3 +203,41 @@ function keyPressed() {
   }
   return false;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// walls = new Group();
+//
+// for (var i = 0; i < 20; i++) {
+//   var w = createSprite(
+//     random(125, width-125), (height/5)*i,
+//     random(10, 100), random(10, 100));
+//   w.shapeColor = color(0);
+//   walls.add(w);
+// }
