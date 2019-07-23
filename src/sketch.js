@@ -143,10 +143,10 @@ function collect(collector, collected) {
   //the event
       collected.remove();
       score+= 3
-  if (collector.scale < 1) {
+  // if (collector.scale < 1) {
     collector.scale += .15;
 
-  }
+  // }
 }
 
 //////////FALLING BLUE RAIN
