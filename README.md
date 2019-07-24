@@ -11,7 +11,7 @@ https://www.youtube.com/watch?v=CHfE7pHK0gU
 ![blobbers screenshot](https://github.com/jralorro93/blobbers-frontend/blob/master/assets/BlobbersScreenshot.png "Blobbers Screenshot")
 
 ## Tech/framework used
-This project was built using vanilla JavaScript, with a Ruby on Rails backend.
+This project was built using vanilla JavaScript, the P5.js library, and a Ruby on Rails backend.
 
 ## Installation
 Run this project by typing "http-server" into your terminal.
