@@ -8,7 +8,7 @@ Blobbers is a game in which the user moves a yellow blob around the screen. The 
 https://www.youtube.com/watch?v=CHfE7pHK0gU
 
 ## Screenshots
-![alt text](https://github.com/jralorro93/blobbers-frontend/tree/master/assets/BlobbersScreenshot.png "Blobbers Screenshot")
+![blobbers screenshot](https://github.com/jralorro93/blobbers-frontend/blob/master/assets/BlobbersScreenshot.png "Blobbers Screenshot")
 
 ## Tech/framework used
 This project was built using vanilla JavaScript, with a Ruby on Rails backend.
